@@ -1,0 +1,24 @@
+{
+  "name": "grab",
+  "version": "1.0.0",
+  "description": "invoke the js file with parameter",
+  "main": "crab.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zeuslfhj/grab_har.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zeuslfhj/grab_har/issues"
+  },
+  "homepage": "https://github.com/zeuslfhj/grab_har",
+  "dependencies": {
+    "jsonfile": "^2.0.0",
+    "minimist": "^1.1.0",
+    "node-fs": "^0.1.7"
+  }
+}
