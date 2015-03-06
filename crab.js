@@ -35,8 +35,13 @@ entries.forEach(function(entry, index, array){
             resData += chunk
         });
 
+        res.on("error", function( e ){
+          console.log("load resource failed:" + e.message);
+          console.error( e.stack );
+        });
+
         res.on('end', function(){
-          var lastInterrogation = url.indexOf('?');
+          var lastInterrogation = url.lastIndexOf('?');
           var src = lastInterrogation > -1 ? url.substring(0, lastInterrogation) : url;
           var domain = src.substring(0, src.indexOf("/", src.indexOf("http://") + 8) + 1);
           var fileName = src.substr( src.lastIndexOf('/') );
@@ -46,7 +51,10 @@ entries.forEach(function(entry, index, array){
           console.log( "url:" + url + "; dirpath:" + dirPath );
           dir.mkdirSync(dirPath, 0777, true);
           fs.writeFile(dirPath + fileName, resData, 'binary', function(err){
-              if (err) throw err
+              if (err){
+                console.error(dirPath + fileName + " has error");
+                throw err;
+              } 
               console.log( dirPath + fileName + 'File saved.');
           })
         })
