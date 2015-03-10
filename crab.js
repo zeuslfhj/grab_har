@@ -7,7 +7,7 @@ var http = require('http')
 var argv = require('minimist')(process.argv.slice(2));
 var jsonPath = argv.har;
 var parentPath = argv.path || "";
-var resouceReg = /\.(jpg|woff|jpeg|gif|png|css|js|html|asp|jsp|php|ogg|mp3|xml)/i;
+var resouceReg = /\.(jpg|woff|jpeg|gif|png|css|js|html|htm|asp|jsp|php|ogg|mp3|xml)/i;
 
 if (!jsonPath) {
   console.log("you must pass the har file path by parameter with key 'har'");
@@ -20,6 +20,10 @@ if (!jsonResult) {
   console.log("loading har file failed");
   process.exit(1);
 };
+
+process.on('uncaughtException', function (err) {
+  console.log('Caught exception: ' + err);
+});
 
 var entries = jsonResult.log.entries;
 
@@ -71,28 +75,3 @@ entries.forEach(function(entry, index, array){
     }
   };
 });
-
-// for( var i = 0; i < imgSrcs.length; i++ ){
-//   (function( imgSrc ){
-//     var request = http.get('http://cny.levi.com.cn/' + imgSrc, function(res){
-//         var imagedata = '';
-//         res.setEncoding('binary');
-
-//         res.on('data', function(chunk){
-//             imagedata += chunk
-//         })
-
-//         res.on('end', function(){
-//             var dirPath = imgSrc.substring(0, imgSrc.lastIndexOf('/'));
-
-//             console.log( dirPath );
-//             dir.mkdirSync(dirPath, 0777, true)
-//             fs.writeFile(imgSrc, imagedata, 'binary', function(err){
-//                 if (err) throw err
-//                 console.log('File saved.')
-//             })
-//         })
-
-//     })
-//   })( imgSrcs[ i ]);
-// }
