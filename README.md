@@ -2,4 +2,4 @@
 invoke the js file with parameter
 
 # Example:
-node crab.js --har 'input_path/*.har' --path 'outputPath'
+node grab.js --har 'input_path/*.har' --path 'outputPath'
